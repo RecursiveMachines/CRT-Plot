@@ -1,50 +1,56 @@
 # CRT-Plot
-A tiny Python tool that converts a JPG (or any image) into an SVG made of CRT-style raster “beam” lines.
-Built specifically for pen plotting with only three gel pens: Red, Green, Blue (no blended colors). Perfect for RGB subpixel / scanline aesthetics on black paper.
 
+**CRT-Plot** converts an image (JPG/PNG/etc.) into an SVG made of **CRT-style raster line segments** for **pen plotting** using **only three pens**: **Red, Green, Blue**.
 
+It draws the image **row-by-row like a TV scan**, and each pixel is represented as **three vertical “subpixel” stripes**: **R | G | B**. Brightness is encoded as **dash density** (solid for bright, sparse/dotted for dim) so the output remains strictly **RGB-only** with no blended stroke colors.
 
-What it makes
+## Features
 
-The SVG is drawn row-by-row like a TV raster scan
-  Each pixel becomes three vertical subpixel stripes: R | G | B
-  Brightness is represented by dash density:
-  bright → more solid ink
-  dim → dotted / sparse segments
-  Output uses only three stroke colors: rgb(255,0,0), rgb(0,255,0), rgb(0,0,255)
+- **RGB subpixel rendering**: every pixel becomes three vertical stripes (R, G, B)
+- **Raster scan order**: processes left-to-right, top-to-bottom like a CRT beam
+- **Brightness via dash density**: more ink for brighter values, less for darker values
+- **Optional black background**: checkbox in the import dialog to add a black rectangle behind the plot
+- **Fast batch workflow**: after exporting, the import dialog opens again
 
-  How it works
+## Output
 
-Launch the script
-A dialog opens immediately:
-Choose an image
-Optional checkbox: Add black background
-Choose where to save the SVG
-It loops back to the import dialog so you can batch-convert multiple images
+- SVG groups are organized by color:
+  - `id="red"`
+  - `id="green"`
+  - `id="blue"`
+- Strokes use:
+  - `rgb(255,0,0)`, `rgb(0,255,0)`, `rgb(0,0,255)`
 
-Requirements
-Python 3
-Pillow
+## Requirements
 
+- Python 3
+- Pillow
 
+Install:
+
+```bash
 pip install pillow
+```
 
-Run
+## Run
+
+```bash
 python3 CRT-Plot.py
+```
 
-Plotting Tips
+## Plotting notes
 
+- For the classic CRT look, plot on **black paper** with **red/green/blue gel pens**.
+- For best results, plot **one color at a time** (R, then G, then B) for cleaner registration.
+- Complexity grows quickly with resolution—if plots are too dense, reduce the maximum width in settings.
 
+## Configuration
 
-Use black paper for the classic CRT glow vibe
-Plot one color at a time (R, then G, then B) for best registration
+Edit the settings near the top of `CRT-Plot.py` to tune the look and plot time:
 
+- `max_width_px` — downscales large images to keep SVGs manageable
+- `target_width_mm` — output width in mm (height follows aspect)
+- `stroke_width_mm` — pen line width
+- `dash_steps`, `dash_fill` — dash “density” used for brightness
+- `gamma` — brightness curve
 
-Customization
-
-Inside the script you can tweak:
-stroke_width_mm → pen line thickness
-
-dash_steps, dash_fill → how “CRT” the brightness dithering looks
-
-gamma → brightness curve
