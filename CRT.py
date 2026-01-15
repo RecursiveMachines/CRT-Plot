@@ -193,7 +193,7 @@ def import_dialog_with_bg_checkbox():
     result = {"path": None, "bg": False}
 
     root = tk.Tk()
-    root.title("SCANLINE FILTER")
+    root.title("CRT-Plot")
     root.resizable(False, False)
 
     bg_var = tk.BooleanVar(value=True)
