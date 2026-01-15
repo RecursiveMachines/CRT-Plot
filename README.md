@@ -40,5 +40,7 @@ Customization
 
 Inside the script you can tweak:
 stroke_width_mm → pen line thickness
+
 dash_steps, dash_fill → how “CRT” the brightness dithering looks
+
 gamma → brightness curve
