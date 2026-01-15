@@ -1,6 +1,6 @@
 # CRT-Plot
 
-**CRT-Plot** converts an image (JPG/PNG/etc.) into an SVG made of **CRT-style raster line segments** for **pen plotting** using **only three pens**: **Red, Green, Blue**.
+**CRT-Plot** converts an image (JPG/PNG) into an SVG made of **CRT-style raster line segments** for **pen plotting** using **only three pens**: **Red, Green, Blue**.
 
 It draws the image **row-by-row like a TV scan**, and each pixel is represented as **three vertical “subpixel” stripes**: **R | G | B**. Brightness is encoded as **dash density** (solid for bright, sparse/dotted for dim) so the output remains strictly **RGB-only** with no blended stroke colors.
 
